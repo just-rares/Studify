@@ -14,6 +14,10 @@ public class Activity {
 
     String title;
 
+    /**
+     * Creates a new activity.
+     * @param title The title of the activity.
+     */
     public Activity(String title) {
         this.title = title;
     }

@@ -1,3 +1,8 @@
-client\controllers\MainCtrl.class
-server\main\DemoApplication.class
+server\repository\UserRepository.class
+commons\Activity.class
+server\main\MainApplication.class
 server\controller\MainController.class
+commons\User.class
+client\controllers\MainCtrl.class
+server\controller\ActivityController.class
+server\repository\ActivityRepository.class
