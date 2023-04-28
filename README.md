@@ -2,10 +2,10 @@
 
 ## Authors
 
-| Name                                               | Email                     | Picture |
-|----------------------------------------------------|---------------------------| ------------- |
-| [Rares Burghelea](https://github.com/just-rares)   | rares.burghelea@gmail.com | <img src="https://avatars.githubusercontent.com/u/113239883?v=4" height="100px">
-| [Razvan Gherasa](https://github.com/razvangherasa) | razvan_gherasa@yahoo.com       | <img src="https://avatars.githubusercontent.com/u/104271984?v=4" height="100px">
+| Name                                               | Email                     | Picture                                                                          |
+|----------------------------------------------------|---------------------------|----------------------------------------------------------------------------------|
+| [Rares Burghelea](https://github.com/just-rares)   | rares.burghelea@gmail.com | <img src="https://avatars.githubusercontent.com/u/113239883?v=4" height="100px"> |
+| [Razvan Gherasa](https://github.com/razvangherasa) | razvan_gherasa@yahoo.com  | <img src="https://avatars.githubusercontent.com/u/104271984?v=4" height="100px"> |
 
 ## Description
 
