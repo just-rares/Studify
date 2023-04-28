@@ -23,7 +23,7 @@ public class DemoApplication extends Application {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/Main.fxml"));
 		Parent root = loader.load();
 		Scene scene = new Scene(root);
-		stage.setTitle("Demo Application");
+		stage.setTitle("Demo Application test");
 		stage.setScene(scene);
 		stage.show();
 	}
