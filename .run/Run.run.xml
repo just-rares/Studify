@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="server.main.MainApplication" />
+    <module name="test" />
+    <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\rares\Desktop\test\javafx-sdk-20\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -19,6 +19,7 @@ public class User {
     public int experience;
     public int level;
 
+
     public User() {
 
     }
