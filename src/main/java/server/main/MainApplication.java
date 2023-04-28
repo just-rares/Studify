@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import static javafx.application.Application.launch;
 
-@SpringBootApplication(scanBasePackages = {"server", "commons", "server.repository"})
+@SpringBootApplication//(scanBasePackages = {"server", "commons", "server.repository"})
 @EntityScan
 public class MainApplication extends Application {
 
