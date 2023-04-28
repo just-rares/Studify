@@ -13,19 +13,19 @@ import static javafx.application.Application.launch;
 @SpringBootApplication(scanBasePackages = {"server.controller"})
 public class MainApplication extends Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MainApplication.class, args);
-		launch();
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MainApplication.class, args);
+        launch();
+    }
 
-	@Override
-	public void start(Stage stage) throws Exception {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/Main.fxml"));
-		Parent root = loader.load();
-		Scene scene = new Scene(root);
-		stage.setTitle("Studify");
-		stage.setScene(scene);
-		stage.show();
-	}
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/Main.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        stage.setTitle("Studify");
+        stage.setScene(scene);
+        stage.show();
+    }
 
 }

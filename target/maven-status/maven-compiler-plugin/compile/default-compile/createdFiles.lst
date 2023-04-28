@@ -1,3 +1,5 @@
-client\controllers\MainCtrl.class
-server\main\DemoApplication.class
+server\repository\UserRepository.class
+server\main\MainApplication.class
 server\controller\MainController.class
+commons\User.class
+client\controllers\MainCtrl.class
