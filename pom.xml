@@ -68,7 +68,7 @@
 				<artifactId>javafx-maven-plugin</artifactId>
 				<version>0.0.8</version>
 				<configuration>
-					<mainClass>server.main.DemoApplication</mainClass>
+					<mainClass>server.main.MainApplication</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>
