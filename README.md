@@ -28,15 +28,17 @@ The project includes the following features:
 Run configuration for the project
 
 ```xml
+
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="server.main.DemoApplication" />
-    <module name="demo" />
-    <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\rares\Desktop\demo-project\javafx-sdk-20\lib&quot; --add-modules=javafx.controls,javafx.fxml" />
-    <method v="2">
-      <option name="Make" enabled="true" />
-    </method>
-  </configuration>
+   <configuration default="false" name="Run" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="server.main.MainApplication"/>
+      <module name="demo"/>
+      <option name="VM_PARAMETERS"
+              value="--module-path &quot;C:\Users\rares\Desktop\demo-project\javafx-sdk-20\lib&quot; --add-modules=javafx.controls,javafx.fxml"/>
+      <method v="2">
+         <option name="Make" enabled="true"/>
+      </method>
+   </configuration>
 </component>
 ```
 <hr>

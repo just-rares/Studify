@@ -11,10 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import static javafx.application.Application.launch;
 
 @SpringBootApplication(scanBasePackages = {"server.controller"})
-public class DemoApplication extends Application {
+public class MainApplication extends Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(MainApplication.class, args);
 		launch();
 	}
 
@@ -23,7 +23,7 @@ public class DemoApplication extends Application {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/Main.fxml"));
 		Parent root = loader.load();
 		Scene scene = new Scene(root);
-		stage.setTitle("Demo Application");
+		stage.setTitle("Studify");
 		stage.setScene(scene);
 		stage.show();
 	}
