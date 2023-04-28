@@ -1,5 +1,8 @@
 server\repository\UserRepository.class
 server\main\MainApplication.class
+server\Config.class
 server\controller\MainController.class
+server\controller\UserController.class
 commons\User.class
+server\service\UserService.class
 client\controllers\MainCtrl.class

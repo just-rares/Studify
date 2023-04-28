@@ -7,10 +7,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import static javafx.application.Application.launch;
 
-@SpringBootApplication(scanBasePackages = {"server.controller"})
+@SpringBootApplication(scanBasePackages = {"server", "commons", "server.repository"})
+@EntityScan
 public class MainApplication extends Application {
 
     public static void main(String[] args) {

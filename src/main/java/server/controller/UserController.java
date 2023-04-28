@@ -1,14 +1,17 @@
 package server.controller;
 
 import commons.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import server.service.UserService;
 
-@Controller
+@RestController
 @RequestMapping("/api/users")
 public class UserController {
 
@@ -20,6 +23,6 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<User> getById(@PathVariable("userId") Long userId) {
-//        return
+        return ResponseEntity.ok(userService.getUserById(userId));
     }
 }
