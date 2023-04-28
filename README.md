@@ -68,4 +68,3 @@ Run tests:
 ```shell
 mvn tests
 ```
-
