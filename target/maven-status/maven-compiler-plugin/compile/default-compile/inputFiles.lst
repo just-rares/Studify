@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Razvan\Desktop\Project\src\main\java\commons\User.java
 C:\Users\Razvan\Desktop\Project\src\main\java\server\controller\MainController.java
 C:\Users\Razvan\Desktop\Project\src\main\java\commons\Activity.java
@@ -6,3 +7,10 @@ C:\Users\Razvan\Desktop\Project\src\main\java\server\main\MainApplication.java
 C:\Users\Razvan\Desktop\Project\src\main\java\server\repository\UserRepository.java
 C:\Users\Razvan\Desktop\Project\src\main\java\client\controllers\MainCtrl.java
 C:\Users\Razvan\Desktop\Project\src\main\java\server\controller\ActivityController.java
+=======
+C:\Users\rares\Desktop\test\src\main\java\server\main\MainApplication.java
+C:\Users\rares\Desktop\test\src\main\java\client\controllers\MainCtrl.java
+C:\Users\rares\Desktop\test\src\main\java\commons\User.java
+C:\Users\rares\Desktop\test\src\main\java\server\repository\UserRepository.java
+C:\Users\rares\Desktop\test\src\main\java\server\controller\MainController.java
+>>>>>>> users

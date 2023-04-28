@@ -1,8 +1,14 @@
 server\repository\UserRepository.class
+<<<<<<< HEAD
 commons\Activity.class
+=======
+>>>>>>> users
 server\main\MainApplication.class
 server\controller\MainController.class
 commons\User.class
 client\controllers\MainCtrl.class
+<<<<<<< HEAD
 server\controller\ActivityController.class
 server\repository\ActivityRepository.class
+=======
+>>>>>>> users
