@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Run" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="server.main.DemoApplication" />
+    <option name="MAIN_CLASS_NAME" value="server.main.MainApplication" />
     <module name="starter" />
     <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\Razvan\Desktop\Project\javafx-sdk-20\lib&quot; --add-modules=javafx.controls,javafx.fxml" />
     <method v="2">
