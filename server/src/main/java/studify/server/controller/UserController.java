@@ -21,7 +21,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserById(userId));
     }
 
-    @PostMapping("/existing")
+    @PostMapping("/")
     public ResponseEntity<String> add(@RequestBody AppUser appUser) {
         int res = userService.save(appUser);
 //        if(res == -1) {
