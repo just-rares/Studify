@@ -1,9 +1,7 @@
-package studify.server.main;
+package studify.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import studify.server.repository.UserRepository;
 
 @SpringBootApplication(scanBasePackages = "studify.server")
 public class MainServer {
