@@ -1,24 +1,24 @@
-package studify.server.commons;
+package studify.server.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 @Entity
-public class User {
+public class AppUser {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     public Long id;
     public String username;
-    public int experience;
-    public int level;
+    public Integer experience;
+    public Integer level;
 
 
-    public User() {
+    public AppUser() {
 
     }
 
-    public User(String username) {
+    public AppUser(String username) {
         this.experience = 0;
         this.level = 0;
         this.username = username;

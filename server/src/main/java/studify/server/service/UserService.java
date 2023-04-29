@@ -1,7 +1,7 @@
 package studify.server.service;
 
 import org.springframework.stereotype.Service;
-import studify.server.commons.User;
+import studify.server.entities.AppUser;
 import studify.server.repository.UserRepository;
 
 @Service
@@ -13,14 +13,14 @@ public class UserService {
         this.users = users;
     }
 
-    public User getUserById(long id) {
+    public AppUser getUserById(long id) {
         if(id < 0 || !users.existsById(id)) {
             return null;
         }
         return users.findUserById(id);
     }
 
-    public void save(User user) {
+    public void save(AppUser user) {
         users.save(user);
     }
 }
