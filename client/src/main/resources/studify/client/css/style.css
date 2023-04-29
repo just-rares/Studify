@@ -1,0 +1,19 @@
+/* Set the background color of the anchor pane to light gray */
+#anchorPane {
+    -fx-background-color: #757575;
+}
+
+/* Set the text color of the label to white */
+#myLabel {
+    -fx-text-fill: white;
+}
+
+/* Set the background color of the plus button to green */
+#plusButton {
+    -fx-background-color: green;
+}
+
+/* Set the background color of the minus button to red */
+#minusButton {
+    -fx-background-color: red;
+}
