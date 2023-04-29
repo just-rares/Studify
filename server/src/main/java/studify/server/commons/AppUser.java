@@ -5,13 +5,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 @Entity
-public class User {
+public class AppUser {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
     public String username;
-    public int experience;
-    public int level;
+    public Integer experience;
+    public Integer level;
 
 
     public User() {
