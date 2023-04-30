@@ -16,6 +16,9 @@ public class Activity {
 
     public Integer hours;
 
+    public Activity() {
+    }
+
     public Activity(String title) {
         this.title = title;
         this.hours = 0;

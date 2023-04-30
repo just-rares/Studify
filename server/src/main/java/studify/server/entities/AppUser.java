@@ -14,6 +14,10 @@ public class AppUser {
     public Integer level;
 
 
+    public AppUser() {
+
+    }
+
     public AppUser(String username) {
         this.experience = 0;
         this.level = 0;

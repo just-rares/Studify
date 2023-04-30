@@ -38,6 +38,7 @@ public class UserService {
     }
 
     public int editUser(AppUser user) {
+        // TODO : Check if exception
 //        if(user.id == null || !users.existsById(user.id)) {
 //            return -1;
 //        }

@@ -18,12 +18,12 @@ public class ActivityController {
         this.activityService = activityService;
     }
 
-    @GetMapping("/{activity}")
+    @GetMapping("/{activityId}")
     public ResponseEntity<Activity> getById(@PathVariable("activityId") Long activityId) {
         return ResponseEntity.ok(activityService.getActivityById(activityId));
     }
 
-    @PostMapping("/new")
+    @PostMapping(path = {"", "/"})
     public ResponseEntity<String> newActivity(@RequestBody Activity activity) {
         if (activity == null) {
             return ResponseEntity.badRequest().body("Invalid activity data");
@@ -39,8 +39,11 @@ public class ActivityController {
     }
 
     @PostMapping("/new/{title}")
-    public ResponseEntity<String> newUser(@PathVariable("title") String title) {
-        Activity activity = new Activity(title == null ? "title" : title);
+    public ResponseEntity<String> newActivity(@PathVariable("title") String title) {
+        if(title == null) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Title can not be null");
+        }
+        Activity activity = new Activity(title);
 
         int result = activityService.save(activity);
 
@@ -48,7 +51,7 @@ public class ActivityController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save activity");
         }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(activity.toString());
+        return ResponseEntity.status(HttpStatus.CREATED).body("Activity created: " + activity.toString());
     }
 
 }

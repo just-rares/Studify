@@ -9,6 +9,7 @@
         <module name="app" />
         <module name="client" />
         <module name="server" />
+        <module name="Studify" />
       </profile>
     </annotationProcessing>
   </component>

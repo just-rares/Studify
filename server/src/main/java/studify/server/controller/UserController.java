@@ -22,23 +22,35 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserById(userId));
     }
 
-    @PostMapping("/new")
+    @PostMapping(path = { "", "/" })
     public ResponseEntity<String> add(@RequestBody AppUser appUser) {
-        int res = userService.save(appUser);
+        System.out.println(appUser);
+        int result = userService.save(appUser);
+        if (result != 1) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save user");
+        }
 
         return ResponseEntity.status(HttpStatus.CREATED).body("User added: " + appUser.toString());
     }
 
     @PostMapping("/new/{username}")
     public ResponseEntity<String> newUser(@PathVariable("username") String username) {
-        AppUser user = new AppUser(username == null ? "username" : username);
-        userService.save(user);
+        if(username == null) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Username can not be null");
+        }
+        //TODO : Check if username already exists
+        AppUser appUser = new AppUser(username);
+        int result = userService.save(appUser);
+        if(result != 1) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save user");
+        }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(user.toString());
+        return ResponseEntity.status(HttpStatus.CREATED).body("User added: " + appUser.toString());
     }
 
     @PutMapping("/edit")
     public ResponseEntity<String> editUser(@RequestBody AppUser appUser) {
+        //TODO Check for errors just like above.
         int res = userService.editUser(appUser);
 
         return ResponseEntity.ok().body("User Saved: " + appUser.toString());
