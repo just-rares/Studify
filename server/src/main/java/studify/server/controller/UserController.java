@@ -1,5 +1,6 @@
 package studify.server.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import studify.server.entities.AppUser;
 import org.springframework.http.ResponseEntity;
@@ -24,31 +25,24 @@ public class UserController {
     @PostMapping("/")
     public ResponseEntity<String> add(@RequestBody AppUser appUser) {
         int res = userService.save(appUser);
-//        if(res == -1) {
-//            return ResponseEntity.badRequest().body("Invalid Attributes");
-//        }
-        return ResponseEntity.ok().body("User added: " + appUser.toString());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("User added: " + appUser.toString());
     }
 
     @PostMapping("/new/{username}")
     public ResponseEntity<String> newUser(@PathVariable("username") String username) {
         AppUser user = new AppUser(username == null ? "username" : username);
-        int res = userService.save(user);
-//        if(res == -1) {
-//            return ResponseEntity.badRequest().body("Invalid Attributes");
-//        }
-        return ResponseEntity.ok().body(user.toString());
+        userService.save(user);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(user.toString());
     }
+
+    @GetMapping("exists/{")
 
     @PutMapping("/edit")
     public ResponseEntity<String> editUser(@RequestBody AppUser appUser) {
         int res = userService.editUser(appUser);
-//        if(res == -1) {
-//            return ResponseEntity.badRequest().body("Invalid id");
-//        }
-//        if(res == -2) {
-//            return ResponseEntity.badRequest().body("Invalid attributes");
-//        }
+
         return ResponseEntity.ok().body("User Saved: " + appUser.toString());
     }
 }

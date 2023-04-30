@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Run - Client" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="studify.client.MainClient" />
+    <option name="MAIN_CLASS_NAME" value="studify.MainClient" />
     <module name="client" />
     <method v="2">
       <option name="Make" enabled="true" />

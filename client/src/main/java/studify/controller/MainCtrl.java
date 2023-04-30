@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import studify.dto.User;
 import org.springframework.web.client.RestTemplate;
+import studify.utils.ServerUtils;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -41,20 +42,25 @@ public class MainCtrl {
 
     }
 
-    public void register(ActionEvent event) throws IOException {
-
+    public void register(ActionEvent event) {
         String username = rUsername.getText();
-        User user = new User(username);
 
-        // what now?
+        ServerUtils serverUtils = new ServerUtils();
 
-        System.out.println("User Created");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/studify/client/scenes/Admin.fxml"));
-        Parent adminViewParent = loader.load();
-        Scene adminViewScene = new Scene(adminViewParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(adminViewScene);
-        window.show();
+        try {
+            String response = serverUtils.registerUser(username);
+            System.out.println("User Created: " + response);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/studify/client/scenes/Admin.fxml"));
+            Parent adminViewParent = loader.load();
+            Scene adminViewScene = new Scene(adminViewParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(adminViewScene);
+            window.show();
+
+        } catch (IOException e) {
+            System.out.println("Error registering user: " + e.getMessage());
+        }
     }
 
     public void adminView(ActionEvent event) throws IOException {
