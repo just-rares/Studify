@@ -24,5 +24,13 @@ public class AppUser {
         this.username = username;
     }
 
-
+    @Override
+    public String toString() {
+        return "AppUser{\n" +
+                "id: " + id +
+                "\nusername: '" + username + '\'' +
+                "\nexperience: " + experience +
+                "\nlevel: " + level +
+                "\n}";
+    }
 }

@@ -1,6 +1,7 @@
 module studify.client {
     requires javafx.controls;
     requires javafx.fxml;
+    requires spring.web;
 
 
     opens studify.client to javafx.fxml;
