@@ -9,11 +9,16 @@
 
 ## Description
 
-One of the most exciting features of Studify is the leveling system, which is designed to motivate users to achieve their goals and gain experience with each completed task. Users start at level 1 and gain experience points by completing tasks and achieving their goals. As they level up, they unlock new features and abilities, which helps keep them motivated to continue learning and growing.
+One of the most exciting features of Studify is the leveling system, which is designed to motivate users to achieve their goals and gain experience with each completed task.
+Users start at level 1 and gain experience points by completing tasks and achieving their goals.
+As they level up, they unlock new features and abilities, which helps keep them motivated to continue learning and growing.
 
-In addition to the leveling system, Studify also provides users with a comprehensive dashboard that tracks their progress and displays detailed statistics about their activities. Users can see how much time they've spent on each activity, how many goals they've achieved, and how many experience points they've earned.
+In addition to the leveling system, Studify also provides users with a comprehensive dashboard that tracks their progress and displays detailed statistics about their activities.
+Users can see how much time they've spent on each activity, how many goals they've achieved, and how many experience points they've earned.
 
-Another great feature of Studify is the ability to add friends and connect with other users. This feature allows users to see their friends' profiles and activities, which can help motivate them to stay on track and achieve their goals. Users can also compete with their friends and see who can achieve the most experience points in a given period.
+Another great feature of Studify is the ability to add friends and connect with other users.
+This feature allows users to see their friends' profiles and activities, which can help motivate them to stay on track and achieve their goals.
+Users can also compete with their friends and see who can achieve the most experience points in a given period.
 <hr>
 
 ## Project Settings
