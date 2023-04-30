@@ -21,9 +21,20 @@ public class UserService {
     }
 
     public int save(AppUser appUser) {
-        //TODO: Having a null check here always fails for some reason.
-        users.save(appUser);
-        return 1;
+        try {
+            if (appUser == null) {
+                throw new IllegalArgumentException("User cannot be null");
+            }
+
+            users.save(appUser);
+            return 1; // Successful save
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace(); // Log the error or perform other actions
+            return -1; // Failed save due to null activity
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the error or perform other actions
+            return -2; // Failed save due to other exception
+        }
     }
 
     public int editUser(AppUser user) {

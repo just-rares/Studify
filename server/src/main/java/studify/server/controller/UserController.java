@@ -22,7 +22,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserById(userId));
     }
 
-    @PostMapping("/")
+    @PostMapping("/new")
     public ResponseEntity<String> add(@RequestBody AppUser appUser) {
         int res = userService.save(appUser);
 
@@ -36,8 +36,6 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(user.toString());
     }
-
-    @GetMapping("exists/{")
 
     @PutMapping("/edit")
     public ResponseEntity<String> editUser(@RequestBody AppUser appUser) {
