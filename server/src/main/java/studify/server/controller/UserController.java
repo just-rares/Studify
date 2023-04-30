@@ -1,5 +1,6 @@
 package studify.server.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import studify.server.entities.AppUser;
 import org.springframework.http.ResponseEntity;
@@ -21,34 +22,37 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserById(userId));
     }
 
-    @PostMapping("/")
+    @PostMapping(path = { "", "/" })
     public ResponseEntity<String> add(@RequestBody AppUser appUser) {
-        int res = userService.save(appUser);
-//        if(res == -1) {
-//            return ResponseEntity.badRequest().body("Invalid Attributes");
-//        }
-        return ResponseEntity.ok().body("User added: " + appUser.toString());
+        System.out.println(appUser);
+        int result = userService.save(appUser);
+        if (result != 1) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save user");
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("User added: " + appUser.toString());
     }
 
     @PostMapping("/new/{username}")
     public ResponseEntity<String> newUser(@PathVariable("username") String username) {
-        AppUser user = new AppUser(username == null ? "username" : username);
-        int res = userService.save(user);
-//        if(res == -1) {
-//            return ResponseEntity.badRequest().body("Invalid Attributes");
-//        }
-        return ResponseEntity.ok().body(user.toString());
+        if(username == null) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Username can not be null");
+        }
+        //TODO : Check if username already exists
+        AppUser appUser = new AppUser(username);
+        int result = userService.save(appUser);
+        if(result != 1) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save user");
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("User added: " + appUser.toString());
     }
 
     @PutMapping("/edit")
     public ResponseEntity<String> editUser(@RequestBody AppUser appUser) {
+        //TODO Check for errors just like above.
         int res = userService.editUser(appUser);
-//        if(res == -1) {
-//            return ResponseEntity.badRequest().body("Invalid id");
-//        }
-//        if(res == -2) {
-//            return ResponseEntity.badRequest().body("Invalid attributes");
-//        }
+
         return ResponseEntity.ok().body("User Saved: " + appUser.toString());
     }
 }

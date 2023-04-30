@@ -1,9 +1,9 @@
 package studify.dto;
 
 public class User {
-    private String username;
-    private Integer experience;
-    private Integer level;
+    public String username;
+    public Integer experience;
+    public Integer level;
 
     public User(String username) {
         this.username = username;

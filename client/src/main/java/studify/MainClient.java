@@ -1,4 +1,4 @@
-package studify.client;
+package studify;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
