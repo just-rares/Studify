@@ -28,48 +28,8 @@ Another great feature of Studify is the ability to add friends and connect with 
 <hr>
 
 ## Project Settings
-Run configuration for the project
-
-```xml
-
-<component name="ProjectRunConfigurationManager">
-   <configuration default="false" name="Run" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="server.main.MainApplication"/>
-      <module name="demo"/>
-      <option name="VM_PARAMETERS"
-              value="--module-path &quot;C:\Users\rares\Desktop\demo-project\javafx-sdk-20\lib&quot; --add-modules=javafx.controls,javafx.fxml"/>
-      <method v="2">
-         <option name="Make" enabled="true"/>
-      </method>
-   </configuration>
-</component>
-```
-<hr>
-
-Install maven + check installation :
+To build the project
 ```shell
-choco install maven
-```
-```shell
-mvn -version
+mvnw package
 ```
 
-<hr>
-
-After installing maven and downloading the project, in order to install the dependencies, run this:
-```shell
-mvn clean install
-```
-<hr>
-
-Build the project:
-
-```shell
-mvn package
-```
-
-Run tests:
-
-```shell
-mvn tests
-```
