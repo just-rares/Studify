@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import studify.server.entities.AppUser;
 import studify.server.repository.UserRepository;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -47,5 +49,9 @@ public class UserService {
 //        }
         users.save(user);
         return 1;
+    }
+
+    public List<AppUser> getAllUsers() {
+        return users.findAll();
     }
 }

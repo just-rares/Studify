@@ -9,6 +9,7 @@ public class MainController {
 
     @GetMapping("/test")
     public ResponseEntity<String> testController() {
+        System.out.println("Connection Successful");
         return ResponseEntity.ok("Test response");
     }
 }

@@ -6,6 +6,8 @@ import studify.server.entities.AppUser;
 import org.springframework.http.ResponseEntity;
 import studify.server.service.UserService;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/users")
@@ -17,10 +19,31 @@ public class UserController {
         this.userService = userService;
     }
 
+/*
+       _____ ______ _______
+      / ____|  ____|__   __|
+     | |  __| |__     | |
+     | | |_ |  __|    | |
+     | |__| | |____   | |
+      \_____|______|  |_|
+*/
+    @GetMapping(path = {"", "/"})
+    public ResponseEntity<List<AppUser>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
     @GetMapping("/{userId}")
     public ResponseEntity<AppUser> getById(@PathVariable("userId") Long userId) {
         return ResponseEntity.ok(userService.getUserById(userId));
     }
+
+/*
+      _____   ____   _____ _______
+     |  __ \ / __ \ / ____|__   __|
+     | |__) | |  | | (___    | |
+     |  ___/| |  | |\___ \   | |
+     | |    | |__| |____) |  | |
+     |_|     \____/|_____/   |_|
+*/
 
     @PostMapping(path = { "", "/" })
     public ResponseEntity<String> add(@RequestBody AppUser appUser) {
@@ -47,6 +70,14 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body("User added: " + appUser.toString());
     }
+/*
+         _____  _    _ _______
+        |  __ \| |  | |__   __|
+        | |__) | |  | |  | |
+        |  ___/| |  | |  | |
+        | |    | |__| |  | |
+        |_|     \____/   |_|
+*/
 
     @PutMapping("/edit")
     public ResponseEntity<String> editUser(@RequestBody AppUser appUser) {

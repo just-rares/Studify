@@ -1,26 +1,21 @@
 package studify.controller;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import studify.dto.User;
-import org.springframework.web.client.RestTemplate;
 import studify.utils.ServerUtils;
-
 import java.io.IOException;
-import java.net.ServerSocket;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MainCtrl {
-    Scene primaryScene;
+public class MainCtrl implements Initializable {
     @FXML
     Button registerButton;
     @FXML
@@ -38,8 +33,14 @@ public class MainCtrl {
     @FXML
     TextField rPassword;
 
-    public void signIn(ActionEvent event) {
 
+    public void signIn(ActionEvent event) {
+        ServerUtils serverUtils = new ServerUtils();
+        try {
+            serverUtils.getUsers();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void register(ActionEvent event) {
@@ -70,5 +71,15 @@ public class MainCtrl {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(adminViewScene);
         window.show();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ServerUtils serverUtils = new ServerUtils();
+        try {
+            serverUtils.connectionCheck();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
