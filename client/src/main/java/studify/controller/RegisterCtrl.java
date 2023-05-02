@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import studify.dto.User;
 import studify.utils.ServerUtils;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class RegisterCtrl {
 
 
     public Scene scene;
-    ServerUtils server;
+    ServerUtils serverUtils;
     MainCtrl mainCtrl;
     @FXML
     Button registerButton, signInButton;
@@ -28,26 +29,29 @@ public class RegisterCtrl {
     @FXML
     TextField siUsername,siPassword;
 
-
-    public RegisterCtrl() {
-
-    }
-
     @Inject
-    public RegisterCtrl(ServerUtils server, MainCtrl mainCtrl) {
-        this.server = server;
+    public RegisterCtrl(ServerUtils serverUtils, MainCtrl mainCtrl) {
+        this.serverUtils = serverUtils;
         this.mainCtrl = mainCtrl;
     }
     public void signIn(ActionEvent event) {
-
+        try {
+            User user = serverUtils.getUserByUsername(siUsername.getText());
+            if(user == null) {
+                System.out.println("User not found");
+                return;
+            }
+            System.out.println(user);
+        } catch (IOException e) {
+            System.out.println("Error in the database");
+        }
     }
 
-    public void register(ActionEvent event) {
+    public void register() {
         String username = rUsername.getText();
-
         try {
-            String response = server.registerUser(username);
-            System.out.println("User Created: " + response);
+            String response = serverUtils.createNewUser(username);
+            System.out.println(response);
             mainCtrl.primaryStage.setScene(mainCtrl.adminCtrl.scene);
             mainCtrl.primaryStage.show();
 

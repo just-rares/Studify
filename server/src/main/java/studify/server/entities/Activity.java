@@ -11,9 +11,7 @@ public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     public Long id;
-
     public String title;
-
     public Integer hours;
 
     public Activity() {
@@ -27,9 +25,9 @@ public class Activity {
     @Override
     public String toString() {
         return "Activity{\n" +
-            "id: " + id +
-            "\ntitle: '" + title + '\'' +
-            "\nhours spent: " + hours +
-            "\n}";
+                "id: " + id +
+                "\ntitle: '" + title + '\'' +
+                "\nhours spent: " + hours +
+                "\n}";
     }
 }

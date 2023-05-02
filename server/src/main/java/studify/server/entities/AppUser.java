@@ -1,14 +1,10 @@
 package studify.server.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 @Entity
 public class AppUser {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    public Long id;
     public String username;
     public Integer experience;
     public Integer level;
@@ -26,8 +22,7 @@ public class AppUser {
 
     @Override
     public String toString() {
-        return "AppUser{\n" +
-                "id: " + id +
+        return "AppUser{" +
                 "\nusername: '" + username + '\'' +
                 "\nexperience: " + experience +
                 "\nlevel: " + level +
