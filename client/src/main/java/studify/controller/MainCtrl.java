@@ -1,74 +1,42 @@
 package studify.controller;
 
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import com.google.inject.Inject;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import studify.dto.User;
-import org.springframework.web.client.RestTemplate;
+import javafx.util.Pair;
+import studify.SceneType;
 import studify.utils.ServerUtils;
 
-import java.io.IOException;
-import java.net.ServerSocket;
+import java.util.Map;
 
 public class MainCtrl {
-    Scene primaryScene;
-    @FXML
-    Button registerButton;
-    @FXML
-    Button signInButton;
-    @FXML
-    TextField siUsername;
-    @FXML
-    TextField siPassword;
-    @FXML
-    TextField rExperience;
-    @FXML
-    TextField rLevel;
-    @FXML
-    TextField rUsername;
-    @FXML
-    TextField rPassword;
 
-    public void signIn(ActionEvent event) {
+    Stage primaryStage;
+    ServerUtils server;
+    RegisterCtrl registerCtrl;
+    Scene register;
+    AdminCtrl adminCtrl;
+    Scene admin;
 
+
+
+    /**
+     * Constructor of the MainCtrl class
+     * @param server interface for sending HTTP requests to the server
+     */
+    @Inject
+    public MainCtrl(ServerUtils server) {
+        this.server = server;
     }
 
-    public void register(ActionEvent event) {
-        String username = rUsername.getText();
+    public void initialize(Stage primaryStage, Map<SceneType, Pair<?, Parent>> scenes) {
+        this.primaryStage = primaryStage;
 
-        ServerUtils serverUtils = new ServerUtils();
+        this.registerCtrl = (RegisterCtrl) scenes.get(SceneType.REGISTER).getKey();
+        registerCtrl.scene = new Scene(scenes.get(SceneType.REGISTER).getValue());
 
-        try {
-            String response = serverUtils.registerUser(username);
-            System.out.println("User Created: " + response);
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/studify/client/scenes/Admin.fxml"));
-            Parent adminViewParent = loader.load();
-            Scene adminViewScene = new Scene(adminViewParent);
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(adminViewScene);
-            window.show();
-
-        } catch (IOException e) {
-            System.out.println("Error registering user: " + e.getMessage());
-        }
-    }
-
-    public void adminView(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/studify/client/scenes/Admin.fxml"));
-        Parent adminViewParent = loader.load();
-        Scene adminViewScene = new Scene(adminViewParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(adminViewScene);
-        window.show();
+        this.adminCtrl = (AdminCtrl) scenes.get(SceneType.ADMIN).getKey();
+        adminCtrl.scene = new Scene(scenes.get(SceneType.ADMIN).getValue());
     }
 }
