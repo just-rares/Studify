@@ -25,8 +25,11 @@ public class MainClient extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-
+        AppConfig appConfig = new AppConfig(FXML);
+        appConfig.loadScenes();
+        Map<SceneType, Pair<?, Parent>> scenes = appConfig.getScenes();
 
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
+        mainCtrl.initialize(primaryStage, scenes);
     }
 }
