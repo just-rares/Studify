@@ -15,13 +15,7 @@ public class MainCtrl {
     Stage primaryStage;
     ServerUtils server;
     RegisterCtrl registerCtrl;
-    Scene register;
     AdminCtrl adminCtrl;
-    Scene admin;
-
-    public MainCtrl() {
-
-    }
 
     /**
      * Constructor of the MainCtrl class
@@ -40,5 +34,8 @@ public class MainCtrl {
 
         this.adminCtrl = (AdminCtrl) scenes.get(SceneType.ADMIN).getKey();
         adminCtrl.scene = new Scene(scenes.get(SceneType.ADMIN).getValue());
+
+        primaryStage.setScene(registerCtrl.scene);
+        primaryStage.show();
     }
 }
