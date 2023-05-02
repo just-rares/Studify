@@ -44,15 +44,14 @@ public class MyFXML {
     /**
      * Method for loading the scenes
      * @param c class of the controller to be loaded
-     * @param url URL of the FXML file
+     * @param parts parts of the filepath
      * @return the pair of a scene and its controller
      * @param <T> the type of the controller
      */
-    public <T> Pair<T, Parent> load(Class<T> c, URL url) {
+    public <T> Pair<T, Parent> load(Class<T> c, String... parts) {
         try {
-            System.out.println("URL: " + url);
 
-            var loader = new FXMLLoader(url, null, null, new MyFactory(), StandardCharsets.UTF_8);
+            var loader = new FXMLLoader(getLocation(parts), null, null, new MyFactory(), StandardCharsets.UTF_8);
             Parent parent = loader.load();
             T ctrl = loader.getController();
             return new Pair<>(ctrl, parent);
@@ -61,7 +60,6 @@ public class MyFXML {
         }
     }
 
-
     /**
      * creates and returns a URL from the parts provided
      * @param parts parts of the URL
@@ -69,6 +67,7 @@ public class MyFXML {
      */
     private URL getLocation(String... parts) {
         var path = Path.of("", parts).toString();
+
         return MyFXML.class.getClassLoader().getResource(path);
     }
 
