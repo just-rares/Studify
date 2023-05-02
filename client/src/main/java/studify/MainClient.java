@@ -25,11 +25,6 @@ public class MainClient extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(MainClient.class.getResource("/studify/client/scenes/Register.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load());
-//        primaryStage.setTitle("Studify!");
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
         AppConfig appConfig = new AppConfig(FXML);
         appConfig.loadScenes();
         Map<SceneType, Pair<?, Parent>> scenes = appConfig.getScenes();

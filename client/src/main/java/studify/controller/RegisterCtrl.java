@@ -45,17 +45,11 @@ public class RegisterCtrl {
     public void register(ActionEvent event) {
         String username = rUsername.getText();
 
-
         try {
             String response = server.registerUser(username);
             System.out.println("User Created: " + response);
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/studify/client/scenes/Admin.fxml"));
-            Parent adminViewParent = loader.load();
-            Scene adminViewScene = new Scene(adminViewParent);
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(adminViewScene);
-            window.show();
+            mainCtrl.primaryStage.setScene(mainCtrl.adminCtrl.scene);
+            mainCtrl.primaryStage.show();
 
         } catch (IOException e) {
             System.out.println("Error registering user: " + e.getMessage());
@@ -63,11 +57,7 @@ public class RegisterCtrl {
     }
 
     public void adminView(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/studify/client/scenes/Admin.fxml"));
-        Parent adminViewParent = loader.load();
-        Scene adminViewScene = new Scene(adminViewParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(adminViewScene);
-        window.show();
+        mainCtrl.primaryStage.setScene(mainCtrl.adminCtrl.scene);
+        mainCtrl.primaryStage.show();
     }
 }

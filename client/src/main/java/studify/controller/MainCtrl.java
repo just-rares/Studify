@@ -36,6 +36,7 @@ public class MainCtrl {
         adminCtrl.scene = new Scene(scenes.get(SceneType.ADMIN).getValue());
 
         primaryStage.setScene(registerCtrl.scene);
+        primaryStage.setTitle("Studify");
         primaryStage.show();
     }
 }

@@ -18,11 +18,6 @@ public class AdminCtrl {
     MainCtrl mainCtrl;
     ServerUtils server;
 
-
-    public AdminCtrl() {
-
-    }
-
     @Inject
     public AdminCtrl(ServerUtils server, MainCtrl mainCtrl) {
         this.server = server;
@@ -30,6 +25,7 @@ public class AdminCtrl {
     }
 
     public void normalView(ActionEvent event) throws IOException {
-        mainCtrl.primaryStage.setScene(this.scene);
+        mainCtrl.primaryStage.setScene(mainCtrl.registerCtrl.scene);
+        mainCtrl.primaryStage.show();
     }
 }
