@@ -42,13 +42,8 @@ public class AdminCtrl implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ServerUtils serverUtils = new ServerUtils();
-        try {
             List<User> users = serverUtils.getUsers();
             displayUsers(users);
-        } catch (IOException e) {
-            System.out.println("Error when trying to retrieve the users" +
-                    " from the database");
-        }
     }
 
     private void displayUsers(List<User> users) {

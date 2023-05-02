@@ -88,7 +88,7 @@ public class ServerUtils {
      * GSON is used to parse the array of users and create objects with it.
      * TODO Learn more about Gson and how to use it for the rest of the GET requests
      */
-    public List<User> getUsers() throws IOException {
+    public List<User> getUsers() {
         Request request = new Request.Builder()
                 .url(BASE_URL + "api/users")
                 .build();
@@ -101,8 +101,31 @@ public class ServerUtils {
             String responseBody = response.body().string();
             Gson gson = new Gson();
             Type userListType = new TypeToken<List<User>>(){}.getType();
-            List<User> users = gson.fromJson(responseBody, userListType);
-            return users;
+            return gson.fromJson(responseBody, userListType);
+        }
+        catch (IOException e) {
+            System.out.println("Error when trying to retrieve the users" +
+                    " from the database: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public User getUserByUsername(String username) throws IOException {
+        Request request = new Request.Builder()
+                .url(BASE_URL + "api/users/" + username)
+                .build();
+        try(Response response = httpClient.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new IOException("Unexpected code " + response);
+            }
+            if(response.body() == null) {
+                System.out.println("User \"" + username + "\" not found");
+                return null;
+            }
+            String responseBody = response.body().string();
+            Gson gson = new Gson();
+            Type userType = new TypeToken<User>(){}.getType();
+            return gson.fromJson(responseBody, userType);
         }
     }
 

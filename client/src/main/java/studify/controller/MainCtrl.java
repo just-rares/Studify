@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import studify.dto.User;
 import studify.exceptions.NotImplementedException;
 import studify.utils.ServerUtils;
 import java.io.IOException;
@@ -53,11 +54,14 @@ public class MainCtrl implements Initializable {
      */
     public void signIn(ActionEvent event) {
         try {
-            throw new NotImplementedException("This method should search" +
-                    " for a user and try to log them in");
-        }
-        catch (NotImplementedException e) {
-            System.out.println(e);
+            User user = serverUtils.getUserByUsername(siUsername.getText());
+            if(user == null) {
+                System.out.println("User not found");
+                return;
+            }
+            System.out.println(user);
+        } catch (IOException e) {
+            System.out.println("Error in the database");
         }
     }
 
