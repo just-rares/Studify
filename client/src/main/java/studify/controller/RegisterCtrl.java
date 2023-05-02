@@ -29,6 +29,10 @@ public class RegisterCtrl {
     TextField siUsername,siPassword;
 
 
+    public RegisterCtrl() {
+
+    }
+
     @Inject
     public RegisterCtrl(ServerUtils server, MainCtrl mainCtrl) {
         this.server = server;

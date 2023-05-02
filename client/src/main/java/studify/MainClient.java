@@ -2,7 +2,9 @@ package studify;
 
 import com.google.inject.Injector;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import studify.controller.MainCtrl;
@@ -23,6 +25,11 @@ public class MainClient extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+//        FXMLLoader fxmlLoader = new FXMLLoader(MainClient.class.getResource("/studify/client/scenes/Register.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load());
+//        primaryStage.setTitle("Studify!");
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
         AppConfig appConfig = new AppConfig(FXML);
         appConfig.loadScenes();
         Map<SceneType, Pair<?, Parent>> scenes = appConfig.getScenes();

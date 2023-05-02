@@ -19,7 +19,9 @@ public class MainCtrl {
     AdminCtrl adminCtrl;
     Scene admin;
 
+    public MainCtrl() {
 
+    }
 
     /**
      * Constructor of the MainCtrl class

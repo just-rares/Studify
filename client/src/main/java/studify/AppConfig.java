@@ -19,8 +19,8 @@ public class AppConfig {
     }
 
     public void loadScenes() {
-        scenes.put(SceneType.REGISTER, FXML.load(RegisterCtrl.class,  "studify", "client", "scenes", "Register.fxml"));
-        scenes.put(SceneType.REGISTER, FXML.load(AdminCtrl.class,  "studify", "client", "scenes", "Admin.fxml"));
+        scenes.put(SceneType.REGISTER, FXML.load(RegisterCtrl.class, "studify", "client", "scenes", "Register.fxml"));
+        scenes.put(SceneType.ADMIN, FXML.load(AdminCtrl.class,  "studify", "client", "scenes", "Admin.fxml"));
     }
 
     public Map<SceneType, Pair<?, Parent>> getScenes(){

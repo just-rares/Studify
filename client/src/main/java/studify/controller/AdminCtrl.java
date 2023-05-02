@@ -18,6 +18,11 @@ public class AdminCtrl {
     MainCtrl mainCtrl;
     ServerUtils server;
 
+
+    public AdminCtrl() {
+
+    }
+
     @Inject
     public AdminCtrl(ServerUtils server, MainCtrl mainCtrl) {
         this.server = server;

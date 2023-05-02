@@ -50,7 +50,7 @@ public class MyFXML {
      */
     public <T> Pair<T, Parent> load(Class<T> c, String... parts) {
         try {
-
+            System.out.println(getLocation(parts));
             var loader = new FXMLLoader(getLocation(parts), null, null, new MyFactory(), StandardCharsets.UTF_8);
             Parent parent = loader.load();
             T ctrl = loader.getController();
@@ -66,9 +66,13 @@ public class MyFXML {
      * @return the created URL
      */
     private URL getLocation(String... parts) {
-        var path = Path.of("", parts).toString();
-
-        return MyFXML.class.getClassLoader().getResource(path);
+        StringBuilder path = new StringBuilder();
+        for(String s : parts) {
+            path.append("/").append(s);
+        }
+        // Aici e ok.
+        URL x = MyFXML.class.getResource(path.toString());
+        return x;
     }
 
     private class MyFactory implements BuilderFactory, Callback<Class<?>, Object> {
