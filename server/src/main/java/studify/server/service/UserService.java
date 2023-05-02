@@ -39,17 +39,17 @@ public class UserService {
         }
     }
 
-    public int editUser(AppUser user) {
-        // TODO : Check if exception
-//        if(user.id == null || !users.existsById(user.id)) {
-//            return -1;
-//        }
-//        if(user.username == null || user.experience < 0 || user.level < 0) {
-//            return -2;
-//        }
-        users.save(user);
-        return 1;
-    }
+//    public int editUser(AppUser user) {
+//        // TODO : Check if exception
+////        if(user.id == null || !users.existsById(user.id)) {
+////            return -1;
+////        }
+////        if(user.username == null || user.experience < 0 || user.level < 0) {
+////            return -2;
+////        }
+//        users.save(user);
+//        return 1;
+//    }
 
     public List<AppUser> getAllUsers() {
         return users.findAll();

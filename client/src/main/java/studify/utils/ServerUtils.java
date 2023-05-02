@@ -26,11 +26,21 @@ public class ServerUtils {
     }
 
 
-
-    public String registerUser(String username) throws IOException {
+    /**
+     * This method does a POST request to the server
+     * following the "api/users/new/{username}" endpoint. This endpoint
+     * creates a new user based on a string of the name.
+     *
+     * @param username String variable for the new user
+     *
+     * @return Response of the server.
+     * @throws IOException In case of errors / unexpected answer from the server
+     */
+    public String createNewUser(String username) throws IOException {
         Request request = new Request.Builder()
             .url(BASE_URL + "api/users/new/" + username)
-            .post(RequestBody.create(new byte[0], MediaType.parse("application/json; charset=utf-8")))
+            .post(RequestBody.create(new byte[0],
+                    MediaType.parse("application/json; charset=utf-8")))
             .build();
 
         try (Response response = httpClient.newCall(request).execute()) {
@@ -40,18 +50,31 @@ public class ServerUtils {
             return response.body().string();
         }
     }
-
+    /**
+     * This method does a POST request to the server
+     * following the "api/activities/new/{username}" endpoint. This endpoint
+     * creates a new activity based on a string of the name.
+     *
+     * @param title String variable for the new user
+     *
+     * @return Response of the server.
+     * @throws IOException In case of errors / unexpected answer from the server
+     */
     public String addActivity(String title) throws IOException {
         Request request = new Request.Builder()
             .url(BASE_URL + "api/activities/new/" + title)
-            .post(RequestBody.create(new byte[0], MediaType.parse("application/json; charset=utf-8")))
+            .post(RequestBody.create(new byte[0],
+                    MediaType.parse("application/json; charset=utf-8")))
             .build();
 
         try (Response response = httpClient.newCall(request).execute()) {
             if (!response.isSuccessful()) {
-                throw new IOException("Unexpected code " + response);
+                throw new RuntimeException("Server returned an error: "
+                        + response.code() + " " + response.message());
             }
             return response.body().string();
+        } catch (IOException e) {
+            throw new IOException("Error making HTTP request: " + e.getMessage(), e);
         }
     }
 
@@ -83,17 +106,25 @@ public class ServerUtils {
         }
     }
 
-    public boolean connectionCheck() throws IOException {
+    /**
+     * This method's purpose is to check the connection upon loading the app
+     * and in case the database file is missing, this requests prompts the server
+     * to create a new, empty one.
+     *
+     * @return True / False whether the connection works
+     * @throws IOException In case of unexpected answer from the server
+     */
+    public boolean connectionCheck() {
         Request request = new Request.Builder()
                 .url(BASE_URL + "test")
                 .build();
 
         try (Response response = httpClient.newCall(request).execute()) {
-            if (!response.isSuccessful()) {
-                throw new IOException("Unexpected code " + response);
-            }
-            return true;
+            return response.isSuccessful();
+        } catch (Exception e) {
+            System.out.println("Unexpected Error");
         }
+        return false;
     }
 
 

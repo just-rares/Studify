@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -23,26 +22,23 @@ import studify.utils.ServerUtils;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class AdminCtrl implements Initializable {
-//
-//    ServerUtils serverUtils;
-//
-//
-//    public AdminCtrl(ServerUtils serverUtils) {
-//        this.serverUtils = serverUtils;
-//    }
-
     @FXML
     Button normalView;
     @FXML
     ScrollPane scrollPane;
 
 
+    /**
+     * Override for the 'initialize' method in the Initializable interface
+     * Displays all users in the database in red/blue rectangles
+     *
+     * @param url The URL location of the FXML file
+     * @param resourceBundle The ResourceBundle containing the resources needed for the FXML file
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ServerUtils serverUtils = new ServerUtils();
@@ -72,9 +68,20 @@ public class AdminCtrl implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
+    /**
+     * ****************** TEMP ******************
+     * This method must use a designated loader to avoid duplicate and
+     * useless code. TODO implement loader
+     * ****************** TEMP ******************
+     *
+     * This method loads the main FXML where you can register a user.
+     *
+     * @param event Mouse press on the "Normal View" button
+     * @throws IOException in case the fxml is missing, the load() method throws
+     * an exception
+     */
     public void normalView(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/studify/client/scenes/Main.fxml"));
         Parent adminViewParent = loader.load();
