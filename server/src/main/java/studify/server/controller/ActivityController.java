@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import studify.server.entities.Activity;
-import studify.server.entities.AppUser;
 import studify.server.service.ActivityService;
 
 @RestController
@@ -18,27 +17,11 @@ public class ActivityController {
         this.activityService = activityService;
     }
 
-    /*
-           _____ ______ _______
-          / ____|  ____|__   __|
-         | |  __| |__     | |
-         | | |_ |  __|    | |
-         | |__| | |____   | |
-          \_____|______|  |_|
-    */
     @GetMapping("/{activityId}")
     public ResponseEntity<Activity> getById(@PathVariable("activityId") Long activityId) {
         return ResponseEntity.ok(activityService.getActivityById(activityId));
     }
 
-    /*
-          _____   ____   _____ _______
-         |  __ \ / __ \ / ____|__   __|
-         | |__) | |  | | (___    | |
-         |  ___/| |  | |\___ \   | |
-         | |    | |__| |____) |  | |
-         |_|     \____/|_____/   |_|
-    */
 
     @PostMapping(path = {"", "/"})
     public ResponseEntity<String> newActivity(@RequestBody Activity activity) {
@@ -70,14 +53,5 @@ public class ActivityController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Activity created: " + activity.toString());
     }
-
-    /*
-         _____  _    _ _______
-        |  __ \| |  | |__   __|
-        | |__) | |  | |  | |
-        |  ___/| |  | |  | |
-        | |    | |__| |  | |
-        |_|     \____/   |_|
-*/
 
 }

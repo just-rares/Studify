@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -23,26 +22,35 @@ import studify.utils.ServerUtils;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class AdminCtrl implements Initializable {
-//
-//    ServerUtils serverUtils;
-//
-//
-//    public AdminCtrl(ServerUtils serverUtils) {
-//        this.serverUtils = serverUtils;
-//    }
-
     @FXML
     Button normalView;
     @FXML
     ScrollPane scrollPane;
 
 
+    /**
+     * This method is an overridden method from implementing the Initializable interface.
+     * It is called whenever a new user is registered, and it adds a new rectangle with the
+     * user's details to the UI.
+     * It first retrieves the list of all registered users from the server using the ServerUtils class.
+     * Then, it creates a VBox container to hold all the rectangles and text nodes for each user.
+     * For each user, it creates a new rectangle and fills it with a color (either red or blue)
+     * based on the user's position in the list.
+     * It then creates a Text node with the user's information (username, level, and experience),
+     * and adds it to the rectangle.
+     * Finally, it creates a StackPane to combine the rectangle and text node, and adds it
+     * to the container.
+     * If there are already existing nodes in the scroll pane content, the new container will
+     * be added to it before setting it as the new content.
+     * If an IOException occurs while trying to retrieve the list of users from the server,
+     * it throws a RuntimeException.
+     * @param url The URL location of the FXML file
+     * @param resourceBundle The ResourceBundle containing the resources needed for the FXML file
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ServerUtils serverUtils = new ServerUtils();
@@ -75,6 +83,18 @@ public class AdminCtrl implements Initializable {
 
     }
 
+    /**
+     * ****************** TEMP ******************
+     * This method must use a designated loader to avoid duplicate and
+     * useless code. TODO implement loader
+     * ****************** TEMP ******************
+     *
+     * This method loads the main FXML where you can register a user.
+     *
+     * @param event Mouse press on the "Normal View" button
+     * @throws IOException in case the fxml is missing, the load() method throws
+     * an exception
+     */
     public void normalView(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/studify/client/scenes/Main.fxml"));
         Parent adminViewParent = loader.load();

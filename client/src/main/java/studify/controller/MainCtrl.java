@@ -10,12 +10,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import studify.exceptions.NotImplementedException;
 import studify.utils.ServerUtils;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainCtrl implements Initializable {
+    ServerUtils serverUtils;
     @FXML
     Button registerButton;
     @FXML
@@ -34,22 +36,30 @@ public class MainCtrl implements Initializable {
     TextField rPassword;
 
 
+    /**
+     * This method finds a user in the database and handles the log-in.
+     *
+     * @param event Mouse click on the sign-in button
+     */
     public void signIn(ActionEvent event) {
-        ServerUtils serverUtils = new ServerUtils();
         try {
-            serverUtils.getUsers();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new NotImplementedException("This method should search for a user and try to log them in");
+        }
+        catch (NotImplementedException e) {
+            System.out.println(e);
         }
     }
 
+    /**
+     * This method takes the username inserted by the user and creates a new
+     * user with that name.
+     *
+     * @param event Mouse Click on the register button.
+     */
     public void register(ActionEvent event) {
         String username = rUsername.getText();
-
-        ServerUtils serverUtils = new ServerUtils();
-
         try {
-            String response = serverUtils.registerUser(username);
+            String response = serverUtils.createNewUser(username);
             System.out.println("User Created: " + response);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/studify/client/scenes/Admin.fxml"));
@@ -63,7 +73,18 @@ public class MainCtrl implements Initializable {
             System.out.println("Error registering user: " + e.getMessage());
         }
     }
-
+    /**
+     * ****************** TEMP ******************
+     * This method must use a designated loader to avoid duplicate and
+     * useless code. TODO implement loader
+     * ****************** TEMP ******************
+     *
+     * This method loads the admin FXML where you can see all the users.
+     *
+     * @param event Mouse press on the "Normal View" button
+     * @throws IOException in case the fxml is missing, the load() method throws
+     * an exception
+     */
     public void adminView(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/studify/client/scenes/Admin.fxml"));
         Parent adminViewParent = loader.load();
@@ -73,13 +94,22 @@ public class MainCtrl implements Initializable {
         window.show();
     }
 
+    /**
+     * ****************** TEMP ******************
+     * All controllers must have the same instance of Server Utils
+     * which should be injected. TODO fix injection and singleton
+     * ****************** TEMP ******************
+     *
+     * Initializes the instance of ServerUtils and checks whether the connection is
+     * present. In case the database is not present, this creates an empty mv.db file
+     *
+     * @param url The URL location of the FXML file
+     * @param resourceBundle The ResourceBundle containing the resources needed for the FXML file
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ServerUtils serverUtils = new ServerUtils();
-        try {
-            serverUtils.connectionCheck();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        serverUtils = new ServerUtils();
+            System.out.println(serverUtils.connectionCheck() ? "Connection Successful"
+                    : "Connection NOT Successful");
     }
 }
