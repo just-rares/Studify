@@ -1,27 +1,30 @@
 package studify.controller;
 
+import com.google.inject.Inject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import studify.utils.ServerUtils;
 
 import java.io.IOException;
 
 public class AdminCtrl {
 
+    public Scene scene;
     @FXML
     Button normalView;
 
+    MainCtrl mainCtrl;
+    ServerUtils server;
+
+    @Inject
+    public AdminCtrl(ServerUtils server, MainCtrl mainCtrl) {
+        this.server = server;
+        this.mainCtrl = mainCtrl;
+    }
+
     public void normalView(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/studify/client/scenes/Main.fxml"));
-        Parent adminViewParent = loader.load();
-        Scene adminViewScene = new Scene(adminViewParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(adminViewScene);
-        window.show();
+        mainCtrl.primaryStage.setScene(this.scene);
     }
 }

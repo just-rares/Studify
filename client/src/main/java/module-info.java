@@ -3,6 +3,7 @@ module studify.client {
     requires javafx.fxml;
     requires spring.web;
     requires okhttp3;
+    requires com.google.guice;
 
 
     opens studify to javafx.fxml;

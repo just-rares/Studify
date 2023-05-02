@@ -1,5 +1,6 @@
 package studify.utils;
 
+import com.google.inject.Singleton;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -8,7 +9,7 @@ import okhttp3.Response;
 
 import java.io.IOException;
 
-
+@Singleton
 public class ServerUtils {
     private static final String BASE_URL = "http://localhost:8080/";
     private final OkHttpClient httpClient;
