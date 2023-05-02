@@ -43,7 +43,8 @@ public class MainCtrl implements Initializable {
      */
     public void signIn(ActionEvent event) {
         try {
-            throw new NotImplementedException("This method should search for a user and try to log them in");
+            throw new NotImplementedException("This method should search" +
+                    " for a user and try to log them in");
         }
         catch (NotImplementedException e) {
             System.out.println(e);
@@ -62,7 +63,8 @@ public class MainCtrl implements Initializable {
             String response = serverUtils.createNewUser(username);
             System.out.println("User Created: " + response);
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/studify/client/scenes/Admin.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("/studify/client/scenes/Admin.fxml"));
             Parent adminViewParent = loader.load();
             Scene adminViewScene = new Scene(adminViewParent);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -86,7 +88,8 @@ public class MainCtrl implements Initializable {
      * an exception
      */
     public void adminView(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/studify/client/scenes/Admin.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("/studify/client/scenes/Admin.fxml"));
         Parent adminViewParent = loader.load();
         Scene adminViewScene = new Scene(adminViewParent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -109,7 +112,7 @@ public class MainCtrl implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         serverUtils = new ServerUtils();
-            System.out.println(serverUtils.connectionCheck() ? "Connection Successful"
+        System.out.println(serverUtils.connectionCheck() ? "Connection Successful"
                     : "Connection NOT Successful");
     }
 }

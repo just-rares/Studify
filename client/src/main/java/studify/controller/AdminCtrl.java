@@ -33,21 +33,9 @@ public class AdminCtrl implements Initializable {
 
 
     /**
-     * This method is an overridden method from implementing the Initializable interface.
-     * It is called whenever a new user is registered, and it adds a new rectangle with the
-     * user's details to the UI.
-     * It first retrieves the list of all registered users from the server using the ServerUtils class.
-     * Then, it creates a VBox container to hold all the rectangles and text nodes for each user.
-     * For each user, it creates a new rectangle and fills it with a color (either red or blue)
-     * based on the user's position in the list.
-     * It then creates a Text node with the user's information (username, level, and experience),
-     * and adds it to the rectangle.
-     * Finally, it creates a StackPane to combine the rectangle and text node, and adds it
-     * to the container.
-     * If there are already existing nodes in the scroll pane content, the new container will
-     * be added to it before setting it as the new content.
-     * If an IOException occurs while trying to retrieve the list of users from the server,
-     * it throws a RuntimeException.
+     * Override for the 'initialize' method in the Initializable interface
+     * Displays all users in the database in red/blue rectangles
+     *
      * @param url The URL location of the FXML file
      * @param resourceBundle The ResourceBundle containing the resources needed for the FXML file
      */
@@ -80,7 +68,6 @@ public class AdminCtrl implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     /**

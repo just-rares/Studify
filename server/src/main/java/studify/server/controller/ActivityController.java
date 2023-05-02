@@ -32,26 +32,30 @@ public class ActivityController {
         int result = activityService.save(activity);
 
         if (result != 1) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save activity");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to save activity");
         }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Activity added: " + activity.toString());
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Activity added: " + activity.toString());
     }
 
     @PostMapping("/new/{title}")
     public ResponseEntity<String> newActivity(@PathVariable("title") String title) {
         if(title == null) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Title can not be null");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Title can not be null");
         }
         Activity activity = new Activity(title);
 
         int result = activityService.save(activity);
 
         if(result != 1) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save activity");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to save activity");
         }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Activity created: " + activity.toString());
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Activity created: " + activity.toString());
     }
-
 }

@@ -39,7 +39,8 @@ public class ServerUtils {
     public String createNewUser(String username) throws IOException {
         Request request = new Request.Builder()
             .url(BASE_URL + "api/users/new/" + username)
-            .post(RequestBody.create(new byte[0], MediaType.parse("application/json; charset=utf-8")))
+            .post(RequestBody.create(new byte[0],
+                    MediaType.parse("application/json; charset=utf-8")))
             .build();
 
         try (Response response = httpClient.newCall(request).execute()) {
@@ -62,12 +63,14 @@ public class ServerUtils {
     public String addActivity(String title) throws IOException {
         Request request = new Request.Builder()
             .url(BASE_URL + "api/activities/new/" + title)
-            .post(RequestBody.create(new byte[0], MediaType.parse("application/json; charset=utf-8")))
+            .post(RequestBody.create(new byte[0],
+                    MediaType.parse("application/json; charset=utf-8")))
             .build();
 
         try (Response response = httpClient.newCall(request).execute()) {
             if (!response.isSuccessful()) {
-                throw new RuntimeException("Server returned an error: " + response.code() + " " + response.message());
+                throw new RuntimeException("Server returned an error: "
+                        + response.code() + " " + response.message());
             }
             return response.body().string();
         } catch (IOException e) {
