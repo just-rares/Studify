@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/test")
+    @GetMapping("/testConnection")
     public ResponseEntity<String> testController() {
         System.out.println("Connection Successful");
-        return ResponseEntity.ok("Test response");
+        return ResponseEntity.ok("Connection is successful");
     }
 }

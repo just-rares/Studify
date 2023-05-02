@@ -8,8 +8,8 @@ import studify.server.entities.AppUser;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<AppUser, Long> {
-    AppUser findUserById(long userId);
+public interface UserRepository extends JpaRepository<AppUser, String> {
+    AppUser findAppUserByUsername(String username);
 
     @Query(value = "SELECT * FROM APP_USER", nativeQuery = true)
     List<AppUser> findAll();

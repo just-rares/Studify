@@ -116,7 +116,7 @@ public class ServerUtils {
      */
     public boolean connectionCheck() {
         Request request = new Request.Builder()
-                .url(BASE_URL + "test")
+                .url(BASE_URL + "testConnection")
                 .build();
 
         try (Response response = httpClient.newCall(request).execute()) {

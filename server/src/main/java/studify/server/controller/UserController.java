@@ -37,17 +37,15 @@ public class UserController {
     }
 
     /**
-     * Returns a user by their id.
+     * GET endpoint for returning a user by their id.
      *
-     * @param userId int value of the id
+     * @param username String value of the username
      * @return AppUser instance with specified id.
      *
-     * @deprecated Users will not have an id as their PK. TBImplemented
      */
-    @Deprecated
-    @GetMapping("/{userId}")
-    public ResponseEntity<AppUser> getById(@PathVariable("userId") Long userId) {
-        return ResponseEntity.ok(userService.getUserById(userId));
+    @GetMapping("/{username}")
+    public ResponseEntity<AppUser> getById(@PathVariable("username") String username) {
+        return ResponseEntity.ok(userService.getUserByUsername(username));
     }
 
     /**
@@ -60,11 +58,19 @@ public class UserController {
     public ResponseEntity<String> add(@RequestBody AppUser appUser) {
         System.out.println(appUser);
         int result = userService.save(appUser);
-        if (result != 1) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save user");
+        // Null Error
+        if(result == -1) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to save user. This may be because of a null value");
         }
-
-        return ResponseEntity.status(HttpStatus.CREATED).body("User added: " + appUser.toString());
+        //Server Error
+        if(result == -2) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to save user. Unexpected Error");
+        }
+        //Success
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("User added: " + appUser.toString());
     }
 
     @PostMapping("/new/{username}")
@@ -73,14 +79,19 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Username can not be null");
         }
-        //TODO : Check if username already exists
         AppUser appUser = new AppUser(username);
         int result = userService.save(appUser);
-        if(result != 1) {
+        // Null Error
+        if(result == -1) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to save user");
+                    .body("Failed to save user. This may be because of a null value");
         }
-
+        //Server Error
+        if(result == -2) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to save user. Unexpected Error");
+        }
+        //Success
         return ResponseEntity.status(HttpStatus.CREATED).body("User added: " + appUser.toString());
     }
 

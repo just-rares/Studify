@@ -1,6 +1,5 @@
 package studify.server.controller;
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,14 +27,18 @@ public class ActivityController {
         if (activity == null) {
             return ResponseEntity.badRequest().body("Invalid activity data");
         }
-
         int result = activityService.save(activity);
-
-        if (result != 1) {
+        // Null Error
+        if(result == -1) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to save activity");
+                    .body("Failed to save activity. This may be because of a null value");
         }
-
+        //Server Error
+        if(result == -2) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to save activity. Unexpected Error");
+        }
+        //Success
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Activity added: " + activity.toString());
     }
@@ -47,14 +50,18 @@ public class ActivityController {
                     .body("Title can not be null");
         }
         Activity activity = new Activity(title);
-
         int result = activityService.save(activity);
-
-        if(result != 1) {
+        // Null Error
+        if(result == -1) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to save activity");
+                    .body("Failed to save activity. This may be because of a null value");
         }
-
+        //Server Error
+        if(result == -2) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to save activity. Unexpected Error");
+        }
+        //Success
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Activity created: " + activity.toString());
     }

@@ -15,13 +15,6 @@ public class UserService {
         this.users = users;
     }
 
-    public AppUser getUserById(long id) {
-        if(id < 0 || !users.existsById(id)) {
-            return null;
-        }
-        return users.findUserById(id);
-    }
-
     public int save(AppUser appUser) {
         try {
             if (appUser == null) {
@@ -31,12 +24,21 @@ public class UserService {
             users.save(appUser);
             return 1; // Successful save
         } catch (IllegalArgumentException e) {
-            e.printStackTrace(); // Log the error or perform other actions
             return -1; // Failed save due to null activity
         } catch (Exception e) {
-            e.printStackTrace(); // Log the error or perform other actions
             return -2; // Failed save due to other exception
         }
+    }
+
+    public AppUser getUserByUsername(String username) {
+        if(username == null || username.length() == 0 || !users.existsById(username)) {
+            return null;
+        }
+        return users.findAppUserByUsername(username);
+    }
+
+    public List<AppUser> getAllUsers() {
+        return users.findAll();
     }
 
 //    public int editUser(AppUser user) {
@@ -51,7 +53,4 @@ public class UserService {
 //        return 1;
 //    }
 
-    public List<AppUser> getAllUsers() {
-        return users.findAll();
-    }
 }

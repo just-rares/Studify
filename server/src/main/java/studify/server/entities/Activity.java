@@ -11,9 +11,7 @@ public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     public Long id;
-
     public String title;
-
     public Integer hours;
 
     public Activity() {
