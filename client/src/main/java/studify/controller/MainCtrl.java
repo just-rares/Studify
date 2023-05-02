@@ -19,21 +19,31 @@ import java.util.ResourceBundle;
 public class MainCtrl implements Initializable {
     ServerUtils serverUtils;
     @FXML
-    Button registerButton;
+    Button registerButton, signInButton;
     @FXML
-    Button signInButton;
+    TextField siUsername, siPassword;
     @FXML
-    TextField siUsername;
-    @FXML
-    TextField siPassword;
-    @FXML
-    TextField rExperience;
-    @FXML
-    TextField rLevel;
-    @FXML
-    TextField rUsername;
-    @FXML
-    TextField rPassword;
+    TextField rExperience, rUsername, rPassword, rLevel;
+
+
+    /**
+     * ****************** TEMP ******************
+     * All controllers must have the same instance of Server Utils
+     * which should be injected. TODO fix injection and singleton
+     * ****************** TEMP ******************
+     *
+     * Initializes the instance of ServerUtils and checks whether the connection is
+     * present. In case the database is not present, this creates an empty mv.db file
+     *
+     * @param url The URL location of the FXML file
+     * @param resourceBundle The ResourceBundle containing the resources needed for the FXML file
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        serverUtils = new ServerUtils();
+        System.out.println(serverUtils.connectionCheck() ? "Connection Successful"
+                : "Connection NOT Successful");
+    }
 
 
     /**
@@ -61,16 +71,9 @@ public class MainCtrl implements Initializable {
         String username = rUsername.getText();
         try {
             String response = serverUtils.createNewUser(username);
-            System.out.println("User Created: " + response);
+            System.out.println(response);
 
-            FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("/studify/client/scenes/Admin.fxml"));
-            Parent adminViewParent = loader.load();
-            Scene adminViewScene = new Scene(adminViewParent);
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(adminViewScene);
-            window.show();
-
+            adminView(event);
         } catch (IOException e) {
             System.out.println("Error registering user: " + e.getMessage());
         }
@@ -95,24 +98,5 @@ public class MainCtrl implements Initializable {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(adminViewScene);
         window.show();
-    }
-
-    /**
-     * ****************** TEMP ******************
-     * All controllers must have the same instance of Server Utils
-     * which should be injected. TODO fix injection and singleton
-     * ****************** TEMP ******************
-     *
-     * Initializes the instance of ServerUtils and checks whether the connection is
-     * present. In case the database is not present, this creates an empty mv.db file
-     *
-     * @param url The URL location of the FXML file
-     * @param resourceBundle The ResourceBundle containing the resources needed for the FXML file
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        serverUtils = new ServerUtils();
-        System.out.println(serverUtils.connectionCheck() ? "Connection Successful"
-                    : "Connection NOT Successful");
     }
 }

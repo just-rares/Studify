@@ -44,29 +44,34 @@ public class AdminCtrl implements Initializable {
         ServerUtils serverUtils = new ServerUtils();
         try {
             List<User> users = serverUtils.getUsers();
-            int i = 0;
-            for(User u : users) {
-                i++;
-                VBox container = new VBox();
-                Node curr = scrollPane.getContent();
-                Rectangle rect = new Rectangle(150, 50);
-                rect.setFill((i%2 == 1) ? Color.RED : Color.BLUE);
-
-                // create a Text node with the user information
-                Text text = new Text(u.username + "\nLevel: " + u.level + "\nExperience: " + u.experience);
-                text.setFill(Color.WHITE);
-                text.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-
-                // add the Text node to the rectangle
-                StackPane stack = new StackPane();
-                stack.getChildren().addAll(rect, text);
-                if(curr != null)
-                    container.getChildren().add(curr);
-                container.getChildren().add(stack);
-                scrollPane.setContent(container);
-            }
+            displayUsers(users);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error when trying to retrieve the users" +
+                    " from the database");
+        }
+    }
+
+    private void displayUsers(List<User> users) {
+        int i = 0;
+        for(User u : users) {
+            i++;
+            VBox container = new VBox();
+            Node curr = scrollPane.getContent();
+            Rectangle rect = new Rectangle(150, 50);
+            rect.setFill((i%2 == 1) ? Color.RED : Color.BLUE);
+
+            // create a Text node with the user information
+            Text text = new Text(u.username + "\nLevel: " + u.level + "\nExperience: " + u.experience);
+            text.setFill(Color.WHITE);
+            text.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+
+            // add the Text node to the rectangle
+            StackPane stack = new StackPane();
+            stack.getChildren().addAll(rect, text);
+            if(curr != null)
+                container.getChildren().add(curr);
+            container.getChildren().add(stack);
+            scrollPane.setContent(container);
         }
     }
 
