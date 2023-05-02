@@ -1,23 +1,32 @@
 package studify;
 
+import com.google.inject.Injector;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.stage.Stage;
+import javafx.util.Pair;
+import studify.AppConfig;
+import studify.controller.MainCtrl;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.google.inject.Guice.createInjector;
 
 public class MainClient extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainClient.class.getResource("/studify/client/scenes/Main.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Studify!");
-        stage.setScene(scene);
-        stage.show();
-    }
+
+    private static final Injector INJECTOR = createInjector(new MyModule());
+    private static final MyFXML FXML = new MyFXML(INJECTOR);
 
     public static void main(String[] args) {
         launch();
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws IOException {
+
+
+        var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
     }
 }
