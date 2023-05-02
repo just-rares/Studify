@@ -12,11 +12,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import studify.dto.User;
+import studify.utils.Initializable;
 import studify.utils.ServerUtils;
 
 import java.io.IOException;
 
-public class RegisterCtrl {
+public class RegisterCtrl implements Initializable {
 
 
     public Scene scene;
@@ -28,6 +29,11 @@ public class RegisterCtrl {
     TextField rUsername, rPassword, rLevel, rExperience;
     @FXML
     TextField siUsername,siPassword;
+
+    @Override
+    public void initialize() {
+
+    }
 
     @Inject
     public RegisterCtrl(ServerUtils serverUtils, MainCtrl mainCtrl) {
@@ -54,14 +60,15 @@ public class RegisterCtrl {
             System.out.println(response);
             mainCtrl.primaryStage.setScene(mainCtrl.adminCtrl.scene);
             mainCtrl.primaryStage.show();
-
+            mainCtrl.adminCtrl.initialize();
         } catch (IOException e) {
             System.out.println("Error registering user: " + e.getMessage());
         }
     }
 
-    public void adminView(ActionEvent event) throws IOException {
+    public void adminView(){
         mainCtrl.primaryStage.setScene(mainCtrl.adminCtrl.scene);
         mainCtrl.primaryStage.show();
+        mainCtrl.adminCtrl.initialize();
     }
 }

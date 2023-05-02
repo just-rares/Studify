@@ -2,9 +2,7 @@ package studify;
 
 import com.google.inject.Injector;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import studify.controller.MainCtrl;
@@ -30,6 +28,6 @@ public class MainClient extends Application {
         Map<SceneType, Pair<?, Parent>> scenes = appConfig.getScenes();
 
         var mainCtrl = INJECTOR.getInstance(MainCtrl.class);
-        mainCtrl.initialize(primaryStage, scenes);
+        mainCtrl.initializeMain(primaryStage, scenes);
     }
 }

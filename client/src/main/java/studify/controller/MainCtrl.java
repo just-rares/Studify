@@ -26,7 +26,7 @@ public class MainCtrl {
         this.server = server;
     }
 
-    public void initialize(Stage primaryStage, Map<SceneType, Pair<?, Parent>> scenes) {
+    public void initializeMain(Stage primaryStage, Map<SceneType, Pair<?, Parent>> scenes) {
         this.primaryStage = primaryStage;
 
         this.registerCtrl = (RegisterCtrl) scenes.get(SceneType.REGISTER).getKey();

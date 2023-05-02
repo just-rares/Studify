@@ -3,7 +3,6 @@ package studify.controller;
 import com.google.inject.Inject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,12 +15,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import studify.dto.User;
+import studify.utils.Initializable;
 import studify.utils.ServerUtils;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class AdminCtrl implements Initializable {
 
@@ -41,7 +39,7 @@ public class AdminCtrl implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize() {
         List<User> users = serverUtils.getUsers();
         displayUsers(users);
     }
