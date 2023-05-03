@@ -11,6 +11,7 @@ client/target/
 *.iws
 *.iml
 *.ipr
+.ideait
 
 ### Eclipse ###
 .apt_generated
