@@ -39,5 +39,5 @@ build/
 .DS_Store
 
 studify.mv.db
-studify.trace   .db
+studify.trace.db
 
