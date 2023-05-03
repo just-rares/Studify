@@ -22,7 +22,7 @@ public class MainClient extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
         AppConfig appConfig = new AppConfig(FXML);
         appConfig.loadScenes();
         Map<SceneType, Pair<?, Parent>> scenes = appConfig.getScenes();
