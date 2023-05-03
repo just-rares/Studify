@@ -5,12 +5,12 @@ import javafx.util.Pair;
 import studify.controller.AdminCtrl;
 import studify.controller.RegisterCtrl;
 
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AppConfig {
     private final Map<SceneType, Pair<?, Parent>> scenes;
+    @SuppressWarnings("MemberName")
     private final MyFXML FXML;
 
     public AppConfig(MyFXML FXML) {
@@ -19,8 +19,10 @@ public class AppConfig {
     }
 
     public void loadScenes() {
-        scenes.put(SceneType.REGISTER, FXML.load(RegisterCtrl.class, "studify", "client", "scenes", "Register.fxml"));
-        scenes.put(SceneType.ADMIN, FXML.load(AdminCtrl.class,  "studify", "client", "scenes", "Admin.fxml"));
+        scenes.put(SceneType.REGISTER, FXML.load(RegisterCtrl.class,
+                "studify", "client", "scenes", "Register.fxml"));
+        scenes.put(SceneType.ADMIN, FXML.load(AdminCtrl.class,
+                "studify", "client", "scenes", "Admin.fxml"));
     }
 
     public Map<SceneType, Pair<?, Parent>> getScenes(){

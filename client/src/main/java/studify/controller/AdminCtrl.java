@@ -54,7 +54,8 @@ public class AdminCtrl implements Initializable {
             rect.setFill((i%2 == 1) ? Color.RED : Color.BLUE);
 
             // create a Text node with the user information
-            Text text = new Text(u.username + "\nLevel: " + u.level + "\nExperience: " + u.experience);
+            Text text = new Text(u.username + "\nLevel: "
+                    + u.level + "\nExperience: " + u.experience);
             text.setFill(Color.WHITE);
             text.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 
