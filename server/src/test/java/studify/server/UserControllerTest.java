@@ -82,7 +82,6 @@ public class UserControllerTest {
     public void testAddUser() throws Exception {
         // Create an instance of AppUser
         AppUser user = new AppUser("newUser");
-        fail();
         // Perform the POST request and pass the user as the request body
         mockMvc.perform(post("/api/users")
                 .contentType(MediaType.APPLICATION_JSON)
