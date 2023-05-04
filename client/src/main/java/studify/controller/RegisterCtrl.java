@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import studify.dto.User;
+import studify.services.SubscriptionService;
 import studify.utils.Initializable;
 import studify.utils.ServerUtils;
 
@@ -18,6 +19,7 @@ public class RegisterCtrl implements Initializable {
 
     public Scene scene;
     ServerUtils serverUtils;
+    SubscriptionService subscriptionService;
     MainCtrl mainCtrl;
     @FXML
     Button registerButton, signInButton;
@@ -32,9 +34,10 @@ public class RegisterCtrl implements Initializable {
     }
 
     @Inject
-    public RegisterCtrl(ServerUtils serverUtils, MainCtrl mainCtrl) {
+    public RegisterCtrl(ServerUtils serverUtils, MainCtrl mainCtrl, SubscriptionService subscriptionService) {
         this.serverUtils = serverUtils;
         this.mainCtrl = mainCtrl;
+        this.subscriptionService = subscriptionService;
     }
     public void signIn(ActionEvent event) {
         try {
@@ -67,4 +70,7 @@ public class RegisterCtrl implements Initializable {
         mainCtrl.primaryStage.show();
         mainCtrl.adminCtrl.initialize();
     }
+
+
+
 }

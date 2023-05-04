@@ -14,12 +14,10 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 
-
-
-
 public class ServerUtils {
     private static final String BASE_URL = "http://localhost:8080/";
     private final OkHttpClient httpClient;
+
 
     public ServerUtils() {
         this.httpClient = new OkHttpClient();
