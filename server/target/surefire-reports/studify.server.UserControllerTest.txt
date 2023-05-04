@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: studify.server.UserControllerTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 3.295 s <<< FAILURE! - in studify.server.UserControllerTest
+testAddUser  Time elapsed: 0.251 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+	at studify.server.UserControllerTest.testAddUser(UserControllerTest.java:85)
+

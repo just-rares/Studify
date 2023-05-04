@@ -16,6 +16,8 @@ import studify.server.repository.UserRepository;
 import studify.server.service.UserService;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasSize;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 
@@ -80,7 +82,7 @@ public class UserControllerTest {
     public void testAddUser() throws Exception {
         // Create an instance of AppUser
         AppUser user = new AppUser("newUser");
-
+        fail();
         // Perform the POST request and pass the user as the request body
         mockMvc.perform(post("/api/users")
                 .contentType(MediaType.APPLICATION_JSON)
