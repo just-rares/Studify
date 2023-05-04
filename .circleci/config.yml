@@ -10,22 +10,23 @@ jobs:
           name: Build
           command: mvn compile
       - run:
-          name: Build
+          name: Build Server
           command: mvn compile -pl server
       - run:
-          name: Build
+          name: Build Client
           command: mvn compile -pl client
       - run:
           name: Test
           command: mvn test
       - run:
-          name: Test
+          name: Test Server
           command: mvn test -pl server
       - run:
-          name: Test
+          name: Test Client
           command: mvn test -pl client
 
 workflows:
   sample:
     jobs:
-      - build-and-test
+      - build-and-test:
+          parallelism: 3
