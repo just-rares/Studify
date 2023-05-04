@@ -1,0 +1,25 @@
+version: 2.1
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/openjdk:19.0
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: mvn compile -pl server
+      - run:
+          name: Build
+          command: mvn compile -pl client
+      - run:
+          name: Test
+          command: mvn test -pl server
+      - run:
+          name: Test
+          command: mvn test -pl client
+
+workflows:
+  sample:
+    jobs:
+      - build-and-test
