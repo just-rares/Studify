@@ -1,0 +1,11 @@
+studify\server\controller\ActivityController.class
+studify\server\controller\UserController.class
+studify\server\repository\ActivityRepository.class
+studify\server\MainServer.class
+studify\server\service\UserService.class
+studify\server\entities\Activity.class
+studify\server\service\ActivityService.class
+studify\server\controller\MainController.class
+studify\server\entities\AppUser.class
+studify\server\repository\UserRepository.class
+studify\server\WebSocketsConfig.class

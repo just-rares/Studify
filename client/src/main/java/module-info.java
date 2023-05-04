@@ -5,6 +5,8 @@ module studify.client {
     requires okhttp3;
     requires com.google.guice;
     requires com.google.gson;
+    requires spring.messaging;
+    requires spring.websocket;
 
     opens studify to javafx.fxml;
     exports studify.controller;

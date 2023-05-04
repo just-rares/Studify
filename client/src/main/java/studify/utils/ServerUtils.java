@@ -7,24 +7,100 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import studify.dto.User;
 
+import org.springframework.messaging.converter.MappingJackson2MessageConverter;
+import org.springframework.messaging.simp.stomp.StompFrameHandler;
+import org.springframework.messaging.simp.stomp.StompHeaders;
+import org.springframework.messaging.simp.stomp.StompSession;
+import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
+import org.springframework.web.socket.client.standard.StandardWebSocketClient;
+import org.springframework.web.socket.messaging.WebSocketStompClient;
+
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-
-
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.function.Consumer;
 
 
 public class ServerUtils {
     private static final String BASE_URL = "http://localhost:8080/";
+    private static String server;
     private final OkHttpClient httpClient;
+    private final WebSocketStompClient stompClient;
+    private StompSession session;
+    private final Map<String, StompSession.Subscription> subscriptions = new HashMap<>();
+    private final HashMap<String, ExecutorService> executors = new HashMap<>();
+    private boolean isConnected;
+
 
     public ServerUtils() {
         this.httpClient = new OkHttpClient();
+        this.stompClient = new WebSocketStompClient(new StandardWebSocketClient());
+        this.stompClient.setMessageConverter(new MappingJackson2MessageConverter());
+        //TODO make changes to the server;
+        String address = "localhost";
+        String port = "8080";
+        server = "http://" + address + ":" + port + "/";
+        try {
+            reinitializeWebSockets(address, port);
+        } catch (Exception e) {
+            reinitializeWebSockets("localhost", "8080");
+        }
     }
 
+
+    private void reinitializeWebSockets(String address, String port) {
+        server = "http://" + address + ":" + port + "/";
+        session = connect("ws://" + address + ":" + port + "/websocket");
+        subscriptions.forEach((k, s) -> {
+            s.unsubscribe();
+        });
+        executors.forEach((k, e) -> {
+            e.shutdownNow();
+        });
+        subscriptions.clear();
+        executors.clear();
+    }
+
+    private StompSession connect(String url) {
+        var client = new StandardWebSocketClient();
+        var stomp = new WebSocketStompClient(client);
+
+        stomp.setMessageConverter(new MappingJackson2MessageConverter());
+        try {
+            isConnected = true;
+            return stomp.connect(url, new StompSessionHandlerAdapter() {}).get();
+        } catch (Exception ignored) {
+        }
+        isConnected = false;
+        return null;
+    }
+
+    public <T> void registerForMessages(String dest, Class<T> type, Consumer<T> consumer) {
+        StompSession.Subscription subscription = session.subscribe(dest, new StompFrameHandler() {
+            @Override
+            public Type getPayloadType(StompHeaders headers) {
+                return type;
+            }
+
+            @Override
+            public void handleFrame(StompHeaders headers, Object payload) {
+                consumer.accept((T) payload);
+            }
+        });
+
+        subscriptions.put(dest, subscription);
+    }
+
+    public void deregisterForMessages(String dest) {
+        subscriptions.get(dest).unsubscribe();
+        subscriptions.remove(dest);
+    }
 
     /**
      * This method does a POST request to the server

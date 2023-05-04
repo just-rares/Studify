@@ -1,6 +1,9 @@
 package studify.server.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 import studify.server.entities.AppUser;
 import org.springframework.http.ResponseEntity;
@@ -55,51 +58,54 @@ public class UserController {
      * @return Response of the server upon adding the entity
      */
     @PostMapping(path = { "", "/" })
-    public ResponseEntity<String> add(@RequestBody AppUser appUser) {
+    public ResponseEntity<AppUser> add(@RequestBody AppUser appUser) {
         System.out.println(appUser);
         int result = userService.save(appUser);
+        return handleResult(result, appUser);
+    }
+
+    private ResponseEntity<AppUser> handleResult(int result, AppUser appUser) {
         // Null Error
         if(result == -1) {
+            System.out.println("Failed to save user. This may be because of a null value");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to save user. This may be because of a null value");
+                    .body(null);
         }
         //Server Error
         if(result == -2) {
+            System.out.println("Failed to save user. Unexpected Error");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to save user. Unexpected Error");
+                    .body(null);
         }
         //Success
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("User added: " + appUser.toString());
+                .body(appUser);
     }
 
     @PostMapping("/new/{username}")
-    public ResponseEntity<String> newUser(@PathVariable("username") String username) {
+    public ResponseEntity<AppUser> newUser(@PathVariable("username") String username) {
         if(username == null) {
+            System.out.println("Username must not be null.");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Username can not be null");
+                    .body(null);
         }
         AppUser appUser = new AppUser(username);
         int result = userService.save(appUser);
-        // Null Error
-        if(result == -1) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to save user. This may be because of a null value");
+        return handleResult(result, appUser);
+    }
+    @MessageMapping("/{username}/users/add")
+    @SendTo("/topic/users/add")
+    public AppUser handleUserAdd(@Payload Object payload) {
+        if (payload instanceof AppUser user) {
+            var appUserResponseEntity = add(user);
+            return appUserResponseEntity.getBody();
+        } else if (payload instanceof String newUsername) {
+            var appUserResponseEntity = newUser(newUsername);
+            return appUserResponseEntity.getBody();
+        } else {
+            // Handle unsupported payload type
+            throw new IllegalArgumentException("Unsupported payload type");
         }
-        //Server Error
-        if(result == -2) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to save user. Unexpected Error");
-        }
-        //Success
-        return ResponseEntity.status(HttpStatus.CREATED).body("User added: " + appUser.toString());
     }
 
-//    @PutMapping("/edit")
-//    public ResponseEntity<String> editUser(@RequestBody AppUser appUser) {
-//        //TODO Check for errors just like above.
-//        int res = userService.editUser(appUser);
-//
-//        return ResponseEntity.ok().body("User Saved: " + appUser.toString());
-//    }
 }
