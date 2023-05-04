@@ -4,29 +4,29 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/openjdk:19.0
+        parallelism: 4
     steps:
       - checkout
       - run:
           name: Build
           command: mvn compile
       - run:
-          name: Build Server
+          name: Build
           command: mvn compile -pl server
       - run:
-          name: Build Client
+          name: Build
           command: mvn compile -pl client
       - run:
           name: Test
           command: mvn test
       - run:
-          name: Test Server
+          name: Test
           command: mvn test -pl server
       - run:
-          name: Test Client
+          name: Test
           command: mvn test -pl client
 
 workflows:
-  build-and-test:
+  sample:
     jobs:
-      - build-and-test:
-          parallelism: 3
+      - build-and-test
