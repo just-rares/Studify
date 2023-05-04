@@ -8,16 +8,10 @@ jobs:
       - checkout
       - run:
           name: Build
-          command: mvn compile
-      - run:
-          name: Build
           command: mvn compile -pl server
       - run:
           name: Build
           command: mvn compile -pl client
-      - run:
-          name: Test
-          command: mvn test
       - run:
           name: Test
           command: mvn test -pl server
