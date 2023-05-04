@@ -1,6 +1,7 @@
 package studify.server.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 import studify.server.entities.AppUser;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,8 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+
+    private SimpMessagingTemplate msgs;
 
     /**
      * Creates the instance and activates the endpoints.
@@ -92,6 +95,7 @@ public class UserController {
                     .body("Failed to save user. Unexpected Error");
         }
         //Success
+        msgs.convertAndSend("topic/addUser/ + username", appUser);
         return ResponseEntity.status(HttpStatus.CREATED).body("User added: " + appUser.toString());
     }
 
