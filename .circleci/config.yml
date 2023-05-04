@@ -4,7 +4,6 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/openjdk:19.0
-        parallelism: 4
     steps:
       - checkout
       - run:
