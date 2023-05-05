@@ -7,6 +7,8 @@ module studify.client {
     requires com.google.gson;
     requires spring.messaging;
     requires spring.websocket;
+    requires java.base;
+    requires spring.core;
 
     opens studify to javafx.fxml;
     exports studify.controller;

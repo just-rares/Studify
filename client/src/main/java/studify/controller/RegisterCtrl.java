@@ -31,6 +31,10 @@ public class RegisterCtrl implements Initializable {
 
     }
 
+    public RegisterCtrl() {
+        
+    }
+
     @Inject
     public RegisterCtrl(ServerUtils serverUtils, MainCtrl mainCtrl) {
         this.serverUtils = serverUtils;
@@ -53,6 +57,7 @@ public class RegisterCtrl implements Initializable {
         String username = rUsername.getText();
         try {
             String response = serverUtils.createNewUser(username);
+            serverUtils.send("/app/users/add", username);
             System.out.println(response);
             mainCtrl.primaryStage.setScene(mainCtrl.adminCtrl.scene);
             mainCtrl.primaryStage.show();

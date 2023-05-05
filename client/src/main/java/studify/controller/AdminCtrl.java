@@ -1,6 +1,7 @@
 package studify.controller;
 
 import com.google.inject.Inject;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -19,6 +20,7 @@ import studify.utils.Initializable;
 import studify.utils.ServerUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdminCtrl implements Initializable {
@@ -32,6 +34,8 @@ public class AdminCtrl implements Initializable {
     @FXML
     ScrollPane scrollPane;
 
+    List<User> users = new ArrayList<>();
+
     @Inject
     public AdminCtrl(ServerUtils serverUtils, MainCtrl mainCtrl) {
         this.serverUtils = serverUtils;
@@ -40,8 +44,14 @@ public class AdminCtrl implements Initializable {
 
     @Override
     public void initialize() {
-        List<User> users = serverUtils.getUsers();
+        users = serverUtils.getUsers();
         displayUsers(users);
+        serverUtils.registerForMessage("topic/users/add", User.class, user -> {
+            Platform.runLater(() -> {
+                users.add(user);
+                displayUsers(users);
+            });
+        });
     }
 
     private void displayUsers(List<User> users) {
