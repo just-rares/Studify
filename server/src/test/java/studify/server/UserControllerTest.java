@@ -11,11 +11,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import studify.server.entities.AppUser;
 import studify.server.repository.UserRepository;
 import studify.server.service.UserService;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasSize;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 
@@ -80,14 +82,29 @@ public class UserControllerTest {
     public void testAddUser() throws Exception {
         // Create an instance of AppUser
         AppUser user = new AppUser("newUser");
+        user.experience = 100;
+        user.level = 200;
 
         // Perform the POST request and pass the user as the request body
-        mockMvc.perform(post("/api/users")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(user)))
-            .andExpect(status().isCreated())
-            .andExpect(content().string("User added: " + user.toString()));
+        MvcResult result = mockMvc.perform(post("/api/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(user)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        // Get the response content as a string
+        String responseContent = result.getResponse().getContentAsString();
+
+        // Deserialize the response into an AppUser object
+        ObjectMapper objectMapper = new ObjectMapper();
+        AppUser actualUser = objectMapper.readValue(responseContent, AppUser.class);
+
+        // Assert the properties of the actual user
+        assertEquals(user.username, actualUser.username);
+        assertEquals(user.experience, actualUser.experience);
+        assertEquals(user.level, actualUser.level);
     }
+
 
     private static String asJsonString(final Object obj) {
         try {
@@ -103,9 +120,27 @@ public class UserControllerTest {
 
     @Test
     public void testNewUser() throws Exception {
-        mockMvc.perform(post("/api/users/new/{username}", "newUser"))
-            .andExpect(status().isCreated())
-            .andExpect(content().string("User added: " + new AppUser("newUser").toString()));
+        // Create an instance of AppUser
+        AppUser user = new AppUser("newUser");
+
+        // Perform the POST request and pass the user as the request body
+        MvcResult result = mockMvc.perform(post("/api/users/new/newUser")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(user)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        // Get the response content as a string
+        String responseContent = result.getResponse().getContentAsString();
+
+        // Deserialize the response into an AppUser object
+        ObjectMapper objectMapper = new ObjectMapper();
+        AppUser actualUser = objectMapper.readValue(responseContent, AppUser.class);
+
+        // Assert the properties of the actual user
+        assertEquals(user.username, actualUser.username);
+        assertEquals(user.experience, actualUser.experience);
+        assertEquals(user.level, actualUser.level);
     }
 
 

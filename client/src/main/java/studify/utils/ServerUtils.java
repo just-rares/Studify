@@ -31,7 +31,7 @@ public class ServerUtils {
     private static final String BASE_URL = "http://localhost:8080/";
     private static String server;
     private final OkHttpClient httpClient;
-    private final WebSocketStompClient stompClient;
+    private final WebSocketStompClient stompClient = null;
     private StompSession session;
     private final Map<String, StompSession.Subscription> subscriptions = new HashMap<>();
     private final HashMap<String, ExecutorService> executors = new HashMap<>();
@@ -40,31 +40,31 @@ public class ServerUtils {
 
     public ServerUtils() {
         this.httpClient = new OkHttpClient();
-        this.stompClient = new WebSocketStompClient(new StandardWebSocketClient());
-        this.stompClient.setMessageConverter(new MappingJackson2MessageConverter());
+//        this.stompClient = new WebSocketStompClient(new StandardWebSocketClient());
+//        this.stompClient.setMessageConverter(new MappingJackson2MessageConverter());
         //TODO make changes to the server;
         String address = "localhost";
         String port = "8080";
         server = "http://" + address + ":" + port + "/";
-        try {
-            reinitializeWebSockets(address, port);
-        } catch (Exception e) {
-            reinitializeWebSockets("localhost", "8080");
-        }
+//        try {
+//            reinitializeWebSockets(address, port);
+//        } catch (Exception e) {
+//            reinitializeWebSockets("localhost", "8080");
+//        }
     }
 
 
     private void reinitializeWebSockets(String address, String port) {
         server = "http://" + address + ":" + port + "/";
-        session = connect("ws://" + address + ":" + port + "/websocket");
-        subscriptions.forEach((k, s) -> {
-            s.unsubscribe();
-        });
-        executors.forEach((k, e) -> {
-            e.shutdownNow();
-        });
-        subscriptions.clear();
-        executors.clear();
+//        session = connect("ws://" + address + ":" + port + "/websocket");
+//        subscriptions.forEach((k, s) -> {
+//            s.unsubscribe();
+//        });
+//        executors.forEach((k, e) -> {
+//            e.shutdownNow();
+//        });
+//        subscriptions.clear();
+//        executors.clear();
     }
 
     private StompSession connect(String url) {
@@ -74,7 +74,8 @@ public class ServerUtils {
         stomp.setMessageConverter(new MappingJackson2MessageConverter());
         try {
             isConnected = true;
-            return stomp.connect(url, new StompSessionHandlerAdapter() {}).get();
+            return null;
+//            return stomp.connect(url, new StompSessionHandlerAdapter() {}).get();
         } catch (Exception ignored) {
         }
         isConnected = false;
